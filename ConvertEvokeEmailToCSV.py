@@ -1,5 +1,13 @@
 #!/usr/bin/python
 
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-o", '--outputfile', required=True, help='Path to CSV output file')
+parser.add_argument('-f', '--folder', default='Evoke', help='Name of folder to create sessions in, in SecureCRT')
+parser.add_argument('-c', '--categories', action='store_true', help='Flag whether or not to create folders for diff type of sessions')
+args = parser.parse_args()
+
 ##############################################
 # Main
 ##############################################
@@ -9,12 +17,11 @@ if __name__ == '__main__':
     # Set true to categorize hosts in to pre-defined categories based on hostname
     # Currently only relevant for SD-WAN deployments following naming conventions
     # that I (Nick Petersen) typically use.
-    do_folder_categories = False
+    print(args)
+    do_folder_categories = args.categories
 
-    # output_file = 'data/scrt_sessions.csv'
-    output_file = 'C:/Users/npetersen/Documents/scrt_new_session.csv'
-    # output_file = '/mnt/c/Users/npetersen/Documents/scrt_new_session.csv'
-    default_scrt_folder = 'Evoke'
+    output_file = args.outputfile
+    default_scrt_folder = args.folder
     protocol = 'SSH2'
     emulation = 'ANSI'
 

@@ -1,4 +1,9 @@
 #!/usr/bin/python
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-o", '--outputdir', required=True, help='Path to yaml output directory')
+args = parser.parse_args()
 
 ##############################################
 # Main
@@ -12,7 +17,7 @@ if __name__ == '__main__':
     do_folder_categories = True
 
     # output_file = 'data/scrt_sessions.csv'
-    output_dir = '../data/yaml'
+    output_dir = args.outputdir
     email_content = []
     line_content = []
     template_name = input("Enter name of Evoke template: ")
@@ -23,6 +28,8 @@ if __name__ == '__main__':
     while True:
         try:
             line = input('')
+            if line == '!!!!':
+                break
         except EOFError:
             break
         email_content.append(line)
