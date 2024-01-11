@@ -34,7 +34,7 @@ if __name__ == '__main__':
     scrt_folder = f'{default_scrt_folder}/{template_name}'
 
     # Get multi-line input from user, using ctrl+d to indicate end of input
-    print('Paste evoke email instance data followed by ctrl+D or "\\n!!!!" : ')
+    print('#--> Paste evoke email instance data from email. (then single line with "!!!!" to submit) <--# ')
     while True:
         try:
             line = input('')
@@ -77,3 +77,5 @@ if __name__ == '__main__':
 
         outfile.write(f'{scrt_folder},{hostname},{ext_ip},{username},{protocol},{emulation}\n')
     outfile.close()
+    print(f'CSV file written at: {args.outputfile}')
+    

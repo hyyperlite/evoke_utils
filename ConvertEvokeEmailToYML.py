@@ -24,7 +24,7 @@ if __name__ == '__main__':
     output_file = f'{output_dir}/{template_name}.yml'
 
     # Get multi-line input from user, using ctrl+d to indicate end of input
-    print('Paste evoke email instance data followed by ctrl+D : ')
+    print('#--> Paste evoke email instance data from email. (then single line with "!!!!" to submit) <--# ')
     while True:
         try:
             line = input('')
@@ -59,3 +59,5 @@ if __name__ == '__main__':
             yaml_file.write(f'     ip: {ext_ip}\n')
             yaml_file.write(f'     login: {username}\n')
             yaml_file.write(f'     password: {password}\n')
+
+    print(f'CSV file written at: {args.outputfile}')
