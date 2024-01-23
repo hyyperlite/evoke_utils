@@ -60,4 +60,4 @@ if __name__ == '__main__':
             yaml_file.write(f'     login: {username}\n')
             yaml_file.write(f'     password: {password}\n')
 
-    print(f'CSV file written at: {args.outputfile}')
+    print(f'CSV file written at: {output_file}')
