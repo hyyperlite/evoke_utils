@@ -30,22 +30,23 @@ if __name__ == '__main__':
     # that I (Nick Petersen) typically use.
     print(args)
 
+    # Initialize variables
     output_file = args.outputfile
     default_scrt_folder = args.folder
     protocol = 'SSH2'
     emulation = 'ANSI'
+    email_content = []
+    template_name = input("Enter name of Evoke template: ")
+    scrt_folder = f'{default_scrt_folder}/{template_name}'
 
+    # Open the output csv file for writing
     outfile = open(output_file, 'w')
+    # Write the column name row
     if args.no_passwd:
         outfile.write('folder,session_name,hostname,username,protocol,emulation\n')
     else:
         outfile.write('folder,session_name,hostname,username,password,protocol,emulation\n')
-        
-
-    email_content = []
-    line_content = []
-    template_name = input("Enter name of Evoke template: ")
-    scrt_folder = f'{default_scrt_folder}/{template_name}'
+       
 
     # Get multi-line input from user, using \n!!!! to indicate end of input
     print('#--> Paste evoke email instance data from email. (then single line with "!!!!" to submit) <--# ')
@@ -58,6 +59,7 @@ if __name__ == '__main__':
             break
         email_content.append(line)
 
+    # Process the evoke email data that was input in to individual variables
     for line in email_content:
         # line = line.lstrip('o').lstrip()
         line = line.lstrip()
@@ -73,6 +75,7 @@ if __name__ == '__main__':
         print(f'password: {password}')
         print('######')
 
+        # Write data to CSV file
         if args.no_passwd:
             outfile.write(f'{scrt_folder},{hostname},{ext_ip},{username},{protocol},{emulation}\n')
         else:
