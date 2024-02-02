@@ -1,10 +1,12 @@
 #!/usr/bin/python
 """
+Created by: Nick Petersen
+
 Create a CSV from the VM instance information in email sent from evoke when new demo has been fully instantiated.
 This is implemented for use with SecureCRT in mind.  It can be used in combination with either (a modified version
 of ImportArbitraryDataToSecureCRT script, available online at VanDyke Support site) -or- (in SecureCRT 9.2+
 the "Import Settings From Text File..." menu option).   The "Import Settings" option allows to set a password for
-each session, while there is no way to do that with import session info script (last i checked).  However, the
+each session while there is no way to do that with import session info script (last i checked).  However, the
 import settings option does require some interaction to set the field order for import each time.
 
 If using Import script then must not include the password field in the csv file (use --no_passwd option in this case)
@@ -60,6 +62,8 @@ if __name__ == '__main__':
         email_content.append(line)
 
     # Process the evoke email data that was input in to individual variables
+    print()
+    print("----------------------------------")
     for line in email_content:
         # line = line.lstrip('o').lstrip()
         line = line.lstrip()
@@ -70,17 +74,25 @@ if __name__ == '__main__':
         password = line_content[10].strip(',')
 
         print(f'hostname: {hostname}')
-        print(f'ext_ip: {ext_ip}')
-        print(f'username: {username}')
-        print(f'password: {password}')
-        print('######')
+        print(f'  ext_ip: {ext_ip}')
+        print(f'  username: {username}')
+        print(f'  password: {password}')
+        print()
 
         # Write data to CSV file
         if args.no_passwd:
             outfile.write(f'{scrt_folder},{hostname},{ext_ip},{username},{protocol},{emulation}\n')
         else:
             outfile.write(f'{scrt_folder},{hostname},{ext_ip},{username},{password},{protocol},{emulation}\n')
+
+    print("----------------------------------")
             
     outfile.close()
+    print()
     print(f'CSV file written at: {args.outputfile}')
+    if args.no_passwd:
+        print("FORMAT:  Folder, Session Name, Hostname/IP Address, Username, Protocol, Emulation")
+    else:
+        print("FORMAT:  Folder, Session Name, Hostname/IP Address, Username, Password, Protocol, Emulation")
+        
     
