@@ -65,8 +65,7 @@ if __name__ == '__main__':
     print()
     print("----------------------------------")
     for line in email_content:
-        # line = line.lstrip('o').lstrip()
-        line = line.lstrip()
+        line = line.lstrip('o').lstrip()
         line_content = line.split()
         hostname = line_content[0].strip(':')
         ext_ip = line_content[6].strip(',')
