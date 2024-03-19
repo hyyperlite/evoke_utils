@@ -43,11 +43,7 @@ if __name__ == '__main__':
 
     # Open the output csv file for writing
     outfile = open(output_file, 'w')
-    # Write the column name row
-    if args.no_passwd:
-        outfile.write('folder,session_name,hostname,username,protocol,emulation\n')
-    else:
-        outfile.write('folder,session_name,hostname,username,password,protocol,emulation\n')
+    outfile.write('hostname,folder,session_name,username,password,protocol,emulation\n')
        
 
     # Get multi-line input from user, using \n!!!! to indicate end of input
@@ -80,9 +76,9 @@ if __name__ == '__main__':
 
         # Write data to CSV file
         if args.no_passwd:
-            outfile.write(f'{scrt_folder},{hostname},{ext_ip},{username},{protocol},{emulation}\n')
+            outfile.write(f'{ext_ip},{scrt_folder},{hostname},{username},{protocol},{emulation}\n')
         else:
-            outfile.write(f'{scrt_folder},{hostname},{ext_ip},{username},{password},{protocol},{emulation}\n')
+            outfile.write(f'{ext_ip},{scrt_folder},{hostname},{username},{password},{protocol},{emulation}\n')
 
     print("----------------------------------")
             
@@ -90,8 +86,8 @@ if __name__ == '__main__':
     print()
     print(f'CSV file written at: {args.outputfile}')
     if args.no_passwd:
-        print("FORMAT:  Folder, Session Name, Hostname/IP Address, Username, Protocol, Emulation")
+        print("FORMAT:  Hostname/IP, Folder, Session Name, Username,,Protocol, Emulation")
     else:
-        print("FORMAT:  Folder, Session Name, Hostname/IP Address, Username, Password, Protocol, Emulation")
+        print("FORMAT:  Hostname/IP, Folder, Session Name, Username, Password, Protocol, Emulation")
         
     
